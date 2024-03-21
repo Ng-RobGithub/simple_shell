@@ -12,6 +12,8 @@
 #include <fcntl.h>
 #include <errno.h>
 
+#define PROMPT "$ "
+
 /* Read/write buffer sizes */
 #define READ_BUF_SIZE 1024
 #define WRITE_BUF_SIZE 1024
@@ -92,9 +94,7 @@ typedef struct passinfo
 	int histcount;
 } info_t;
 
-#define INFO_INIT
-{NULL, NULL, NULL, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, 0, 0, NULL, \0,
-	0, 0}
+#define INFO_INIT {NULL, NULL, NULL, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, 0, 0, NULL, '\0'}
 
 /* Struct for built-in commands */
 /**
@@ -186,5 +186,6 @@ void check_chain(info_t *, char *, size_t *, size_t, size_t);
 int replace_alias(info_t *);
 int replace_vars(info_t *);
 int replace_string(char **, char *);
+void handle_open_error(const char *program_name, const char *file_name);
 
 #endif /* SHELL_H */
