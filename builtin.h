@@ -65,7 +65,6 @@ typedef struct liststr
  * @environ: custom modified copy of environ from LL env
  * @history: the history node
  * @alias: the alias node
- * @env_changed: on if environ was changed
  * @status: the return status of the last exec'd command
  * @cmd_buf: address of pointer to cmd_buf, on if chaining
  * @cmd_buf_type: CMD_type ||, &&, ;
@@ -102,6 +101,7 @@ typedef struct passinfo
  * @type: the builtin command flag
  * @func: the function
  */
+
 typedef struct builtin
 {
 	char *type;
@@ -109,7 +109,6 @@ typedef struct builtin
 } builtin_table;
 
 /* Function prototypes */
-void print_prompt();
 int hsh(info_t *, char **);
 int find_builtin(info_t *);
 void find_cmd(info_t *);
@@ -118,17 +117,13 @@ int is_cmd(info_t *, char *);
 char *dup_chars(char *, int, int);
 char *find_path(info_t *, char *, char *);
 int loophsh(char **);
-void _eputs(char *);
-int _eputchar(char);
 int _putfd(char, int);
 int _putsfd(char *, int);
 int _strlen(char *);
-int _strcmp(char *, char *);
 char *starts_with(const char *, const char *);
 char *_strcat(char *, char *);
 char *_strcpy(char *, char *);
 char *_strdup(const char *);
-void _puts(char *);
 int _putchar(char);
 char *_strncpy(char *, char *, int);
 char *_strncat(char *, char *, int);
@@ -143,8 +138,6 @@ int interactive(info_t *);
 int is_delim(char, char *);
 int _isalpha(int);
 int _atoi(char *);
-int _erratoi(char *);
-void print_error(info_t *, char *);
 int print_d(int, int);
 char *convert_number(long int, int, int);
 void remove_comments(char *);
@@ -159,14 +152,12 @@ void sigintHandler(int);
 void clear_info(info_t *);
 void set_info(info_t *, char **);
 void free_info(info_t *, int);
-char *_getenv(info_t *, const char *);
 int _myenv(info_t *);
 int _mysetenv(info_t *);
 int _myunsetenv(info_t *);
 int populate_env_list(info_t *);
 char **get_environ(info_t *);
 int _unsetenv(info_t *, char *);
-int _setenv(info_t *, char *, char *);
 char *get_history_file(info_t *info);
 int write_history(info_t *info);
 int read_history(info_t *info);
@@ -187,6 +178,5 @@ void check_chain(info_t *, char *, size_t *, size_t, size_t);
 int replace_alias(info_t *);
 int replace_vars(info_t *);
 int replace_string(char **, char *);
-void handle_open_error(const char *program_name, const char *file_name);
 
 #endif /* SHELL_H */
